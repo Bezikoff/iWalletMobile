@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.MainPage">
+
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="10">
+
+            <!-- Авторизация -->
+            <StackLayout x:Name="AuthLayout">
+                <Entry x:Name="LoginEntry" Placeholder="Логин"/>
+                <Entry x:Name="PasswordEntry" Placeholder="Пароль" IsPassword="True"/>
+                <Button Text="Войти" Clicked="OnLoginClicked"/>
+                <Button Text="Регистрация" Clicked="OnRegisterClicked"/>
+            </StackLayout>
+
+            <!-- Основной интерфейс -->
+            <StackLayout x:Name="MainLayout" IsVisible="False">
+                <!-- Переключение -->
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="10">
+                    <Button x:Name="MainButton" Text="Главное" Clicked="OnMainClicked"/>
+                    <Button x:Name="IncomeButton" Text="Доходы" Clicked="OnIncomeClicked"/>
+                    <Button x:Name="OutcomeButton" Text="Расходы" Clicked="OnOutcomeClicked"/>
+                    <Button x:Name="PassIncomeButton" Text="Инвестиции" Clicked="OnPassIncomeClicked"/>
+                </StackLayout>
+
+                <!-- Добавить запись -->
+                <Button Text="+ Добавить" Clicked="OnAddClicked" />
+
+                <!-- Форма -->
+                <StackLayout x:Name="AddFormLayout" IsVisible="False" Padding="10" BackgroundColor="#eeeeee">
+                    <Label Text="Сумма:"/>
+                    <Entry x:Name="EntryAmount" Keyboard="Numeric"/>
+
+                    <Label Text="Дата:"/>
+                    <DatePicker x:Name="EntryDate"/>
+
+                    <Label x:Name="LabelBuyPrice" Text="Цена покупки (для инвестиций):"/>
+                    <Entry x:Name="EntryBuyPrice" Keyboard="Numeric"/>
+
+                    <Label x:Name="LabelPercent" Text="Процент (для инвестиций):"/>
+                    <Entry x:Name="EntryPercent" Keyboard="Numeric"/>
+
+                    <Button x:Name="SaveButton" Text="Сохранить" Clicked="OnSaveClicked"/>
+                </StackLayout>
+
+                <!-- Главное -->
+                <StackLayout x:Name="MainInfoLayout" IsVisible="False" Padding="10" BackgroundColor="#e0e0e0">
+                    <Label x:Name="BalanceLabel" FontSize="20" FontAttributes="Bold"/>
+                    <Label x:Name="DividendLabel" FontSize="16"/>
+                </StackLayout>
+
+                <!-- Таблицы -->
+                <CollectionView x:Name="IncomeView" IsVisible="True">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Padding="10" BackgroundColor="#f0f0f0" Margin="5">
+                                <Label Text="{Binding Amount}" />
+                                <Label Text="{Binding Date}" />
+                                <StackLayout Orientation="Horizontal" Spacing="10">
+                                    <Button Text="Удалить" Clicked="OnDeleteClicked" CommandParameter="{Binding}" />
+                                    <Button Text="Редактировать" Clicked="OnEditClicked" CommandParameter="{Binding}" />
+                                </StackLayout>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <CollectionView x:Name="OutcomeView" IsVisible="False">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Padding="10" BackgroundColor="#f0f0f0" Margin="5">
+                                <Label Text="{Binding Amount}" />
+                                <Label Text="{Binding Date}" />
+                                <StackLayout Orientation="Horizontal" Spacing="10">
+                                    <Button Text="Удалить" Clicked="OnDeleteClicked" CommandParameter="{Binding}" />
+                                    <Button Text="Редактировать" Clicked="OnEditClicked" CommandParameter="{Binding}" />
+                                </StackLayout>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <CollectionView x:Name="PassIncomeView" IsVisible="False">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Padding="10" BackgroundColor="#f0f0f0" Margin="5">
+                                <Label Text="{Binding BuyPrice}" />
+                                <Label Text="{Binding Percent}" />
+                                <Label Text="{Binding Date}" />
+                                <StackLayout Orientation="Horizontal" Spacing="10">
+                                    <Button Text="Удалить" Clicked="OnDeleteClicked" CommandParameter="{Binding}" />
+                                    <Button Text="Редактировать" Clicked="OnEditClicked" CommandParameter="{Binding}" />
+                                </StackLayout>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>
